@@ -3,7 +3,7 @@
 # Smallest base image
 FROM alpine:edge
 
-LABEL maintainer="Kyle Manna <kyle@kylemanna.com>"
+LABEL maintainer="Tomas Nevar <tomas@lisenet.com>"
 
 # Testing: pamtester
 RUN apk add --update openvpn iptables bash easy-rsa openvpn-auth-pam google-authenticator libqrencode && \
