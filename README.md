@@ -11,6 +11,7 @@ Dockerfile and config forked from no longer maintained GitHub repo: https://gith
 
 * Docker Registry: [lisenet/openvpn](https://hub.docker.com/r/lisenet/openvpn/)
 * GitHub: [lisenet/docker-openvpn](https://github.com/lisenet/docker-openvpn)
+* OpenVPN: [OpenVPN/openvpn](https://github.com/OpenVPN/openvpn/tags)
 
 ## How to Build Locally
 
