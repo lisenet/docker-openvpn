@@ -7,9 +7,14 @@ on:
       - "**/README.md"
   pull_request: []
 
+permissions:
+  contents: write
+
 jobs:
   build-container:
     runs-on: ubuntu-22.04
+    env:
+      BUILD_ID: ${{ github.run_number }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -31,6 +36,7 @@ jobs:
           images: lisenet/openvpn
           tags: |
             type=raw,value=${{ env.OPENVPN_VERSION }}
+            type=raw,value=${{ env.OPENVPN_VERSION }}-build${{ env.BUILD_ID }}
             type=raw,value=latest
 
       - name: Build and push
@@ -40,3 +46,10 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Release
+        uses: softprops/action-gh-release@v0.1.15
+        if: github.ref == 'refs/heads/master'
+        with:
+          tag_name: v${{ env.OPENVPN_VERSION }}-build${{ env.BUILD_ID }}
+          generate_release_notes: true
