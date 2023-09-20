@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-
-set -ex
+set -e
 
 source bin/_helpers.sh
 ensure-environment "VPN_PROTOCOL VPN_HOSTNAME VPN_PORT DNS_SERVER NETWORK_CIDR APP_VERSION"
