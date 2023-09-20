@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
-
-set -ex
+set -e
 
 source bin/_helpers.sh
 ensure-environment "VPN_HOSTNAME NAMESPACE"
 
 cmd_delete="kubectl -n ${NAMESPACE} delete"
 cmd_create="kubectl -n ${NAMESPACE} create"
+
+if ! kubectl get namespace "${NAMESPACE}" > /dev/null 2>&1; then
+  kubectl create namespace "${NAMESPACE}"
+fi
 
 if [[ ! -z "${REPLACE}" ]] && [[ "${REPLACE}" == "true" ]]; then
   echo "Removing all previous secrets and configmaps"

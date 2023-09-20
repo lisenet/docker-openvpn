@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-
-set -ex
+set -e
 
 source bin/_helpers.sh
 ensure-environment "CLIENT_NAME APP_VERSION"
