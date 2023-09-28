@@ -2,6 +2,10 @@
 
 [![Docker Stars](https://img.shields.io/docker/stars/lisenet/openvpn.svg)](https://hub.docker.com/r/lisenet/openvpn/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/lisenet/openvpn.svg)](https://hub.docker.com/r/lisenet/openvpn/)
+[![last commit](https://img.shields.io/github/last-commit/lisenet/docker-openvpn)](https://github.com/lisenet/docker-openvpn/commits/master)
+[![commit activity](https://img.shields.io/github/commit-activity/y/lisenet/docker-openvpn)](https://github.com/lisenet/docker-openvpn/commits/master)
+[![issues](https://img.shields.io/github/issues/lisenet/docker-openvpn)](https://github.com/lisenet/docker-openvpn/issues)
+[![pull_requests_closed](https://img.shields.io/github/issues-pr-closed/lisenet/docker-openvpn)](https://github.com/lisenet/docker-openvpn/pulls)
 
 OpenVPN server in a Docker container complete with an EasyRSA PKI CA.
 
