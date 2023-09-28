@@ -343,7 +343,7 @@ else
 fi
 
 [ -n "$OVPN_TLS_CIPHER" ] && echo "tls-cipher $OVPN_TLS_CIPHER" >> "$conf"
-[ -n "$OVPN_CIPHER" ] && echo "cipher $OVPN_CIPHER" >> "$conf"
+[ -n "$OVPN_CIPHER" ] && echo -e "cipher $OVPN_CIPHER\ndata-ciphers $OVPN_CIPHER" >> "$conf"
 [ -n "$OVPN_AUTH" ] && echo "auth $OVPN_AUTH" >> "$conf"
 
 [ -n "${OVPN_CLIENT_TO_CLIENT:-}" ] && echo "client-to-client" >> "$conf"

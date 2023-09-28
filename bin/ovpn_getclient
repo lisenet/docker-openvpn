@@ -85,7 +85,7 @@ tls-auth ta.key 1
     fi
 
     if [ -n "$OVPN_CIPHER" ]; then
-        echo "cipher $OVPN_CIPHER"
+        echo -e "cipher $OVPN_CIPHER\ndata-ciphers $OVPN_CIPHER"
     fi
 
     if [ -n "$OVPN_AUTH" ]; then

@@ -7,7 +7,7 @@ ensure-environment "VPN_PROTOCOL VPN_HOSTNAME VPN_PORT DNS_SERVER NETWORK_CIDR A
 echo "Generating OpenVPN config..."
 docker run --net=none --rm -it -v "${PWD}/ovpn0:/etc/openvpn" "lisenet/openvpn:${APP_VERSION}" ovpn_genconfig \
   -u "${VPN_URI}" \
-  -C 'AES-256-CBC' -a 'SHA384' \
+  -C 'AES-256-GCM' -a 'SHA384' \
   -b -n "${DNS_SERVER}" \
   -s "${NETWORK_CIDR}" \
   -e "topology subnet"
