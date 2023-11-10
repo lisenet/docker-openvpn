@@ -16,9 +16,12 @@ jobs:
       - name: Get the latest version of OpenVPN
         run: |
           OPENVPN_VERSION_TAG=$(curl -fsSL https://api.github.com/repos/openvpn/openvpn/git/refs/tags|jq -r .[].ref|cut -d"/" -f3|grep -E -ve "alpha|beta|branch|rc|RC"|sort -V|tail -n1|sed "s/v//g")
-          if curl -fsSL http://dl-cdn.alpinelinux.org/alpine/edge/main/x86_64/ | grep "openvpn-${OPENVPN_VERSION_TAG}"; then
-            echo "${OPENVPN_VERSION_TAG}" > version
-            echo "OPENVPN_VERSION=$(cat version)" >> $GITHUB_ENV
+          if ! [ -z "${OPENVPN_VERSION_TAG}" ]; then
+            if curl -fsSL http://dl-cdn.alpinelinux.org/alpine/edge/main/x86_64/ | grep "openvpn-${OPENVPN_VERSION_TAG}"; then
+              echo "${OPENVPN_VERSION_TAG}" > version
+              echo "{\"version\":\"${OPENVPN_VERSION_TAG}\"}" > manifest.json
+              echo "OPENVPN_VERSION=$(cat version)" >> $GITHUB_ENV
+            fi
           fi
       - name: Add & Commit
         uses: EndBug/add-and-commit@v9.1.1

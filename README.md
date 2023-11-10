@@ -1,5 +1,6 @@
 # OpenVPN for Docker
 
+[![version](https://img.shields.io/github/manifest-json/v/lisenet/docker-openvpn?label=OpenVPN)](https://github.com/lisenet/docker-openvpn/blob/master/manifest.json)
 [![Docker Stars](https://img.shields.io/docker/stars/lisenet/openvpn.svg)](https://hub.docker.com/r/lisenet/openvpn/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/lisenet/openvpn.svg)](https://hub.docker.com/r/lisenet/openvpn/)
 [![last commit](https://img.shields.io/github/last-commit/lisenet/docker-openvpn)](https://github.com/lisenet/docker-openvpn/commits/master)
