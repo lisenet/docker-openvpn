@@ -6,10 +6,12 @@ FROM alpine:edge
 LABEL maintainer="Tomas Nevar <tomas@lisenet.com>"
 
 # Testing: pamtester
-RUN apk add --update openvpn iptables bash easy-rsa openvpn-auth-pam google-authenticator libqrencode && \
+RUN apk add --update openvpn iptables iptables-legacy bash easy-rsa openvpn-auth-pam google-authenticator libqrencode && \
     apk update && apk upgrade && \
     ln -s /usr/share/easy-rsa/easyrsa /usr/local/bin && \
-    rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*
+    rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/* && \
+    rm /sbin/iptables && \
+    ln -s /sbin/iptables-legacy /sbin/iptables
 
 # Needed by scripts
 ENV OPENVPN=/etc/openvpn
