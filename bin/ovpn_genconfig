@@ -285,6 +285,12 @@ set +u
 [ -z "$OVPN_PROTO" ] && OVPN_PROTO=udp
 [ -z "$OVPN_PORT" ] && OVPN_PORT=1194
 set -u
+if [ "${#OVPN_ROUTES[@]}" == "0" ] && [ "$OVPN_DEFROUTE" == "0" ]; then
+  echo "Default route disabled (-d) but no other routes provided!"
+  echo "Use (-r) to provide a route when disabling the default route"
+  exit 1
+fi
+
 [ "${#OVPN_ROUTES[@]}" == "0" ] && [ "$OVPN_DEFROUTE" == "1" ]
 
 # Preserve config
