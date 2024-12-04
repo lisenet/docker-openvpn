@@ -10,7 +10,7 @@ RUN apk add --update openvpn iptables iptables-legacy bash easy-rsa openvpn-auth
     apk update && apk upgrade && \
     ln -s /usr/share/easy-rsa/easyrsa /usr/local/bin && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/* && \
-    rm /sbin/iptables && \
+    (rm /sbin/iptables || true) && \
     ln -s /sbin/iptables-legacy /sbin/iptables
 
 # Needed by scripts
