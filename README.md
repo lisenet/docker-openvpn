@@ -18,6 +18,10 @@ Dockerfile and config forked from a no longer maintained [kylemanna/docker-openv
 * GitHub: [lisenet/docker-openvpn](https://github.com/lisenet/docker-openvpn)
 * OpenVPN: [OpenVPN/openvpn](https://github.com/OpenVPN/openvpn/tags)
 
+## Deprecations
+
+Note that `iptables-legacy` is no longer supported by this repository.
+
 ## Release Process
 
 There are three Docker tags used for every new container image build using GitHub workflows:
