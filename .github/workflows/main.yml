@@ -52,7 +52,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Release
-        uses: softprops/action-gh-release@v0.1.15
+        uses: softprops/action-gh-release@v2.3.2
         if: github.ref == 'refs/heads/master'
         with:
           tag_name: ${{ env.OPENVPN_VERSION }}-build${{ env.BUILD_ID }}
