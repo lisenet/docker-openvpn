@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   build-container:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     env:
       BUILD_ID: ${{ github.run_number }}
     steps:
