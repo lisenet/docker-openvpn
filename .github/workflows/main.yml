@@ -20,7 +20,7 @@ jobs:
       BUILD_ID: ${{ github.run_number }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Export OpenVPN version to variable
         run: echo "OPENVPN_VERSION=$(cat version)" >> $GITHUB_ENV
