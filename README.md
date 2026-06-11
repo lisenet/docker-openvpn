@@ -44,15 +44,19 @@ docker build --pull --no-cache -t lisenet/openvpn:latest .
 
 ## How to Deploy
 
-Deployment to Kubernetes is currently the only supported (and tested) method. If you would like to [contribute](CONTRIBUTING.md) and provide instructions for other deployment methods (e.g. Podman, Docker engine, Compose, Swarm etc), please consider raising a pull request.
+The following deployment methods are supported and tested:
 
-See [docs/kubernetes-deployment.md](./docs/kubernetes-deployment.md).
+* Kubernetes: see [docs/kubernetes-deployment.md](./docs/kubernetes-deployment.md).
+* Docker Compose: see [docs/docker-compose.md](./docs/docker-compose.md).
+
+If you would like to [contribute](CONTRIBUTING.md) and provide instructions for other deployment methods (e.g. Podman, Docker engine, Swarm etc), please consider raising a pull request.
 
 ## Tested On
 
 * OpenVPN server deployment:
   * Kubernetes 1.28 on Rocky 9 (QEMU/KVM).
   * Kubernetes 1.26 on Rocky 8 (QEMU/KVM).
+  * Docker Engine 29.5.3 with Docker Compose plugin 5.1.4 on Ubuntu 24.04 (VMware).
 * Clients:
   * Android App OpenVPN Connect 3.3.4 (9290).
   * OpenVPN 2.5.9 on Rocky 9.
@@ -60,6 +64,7 @@ See [docs/kubernetes-deployment.md](./docs/kubernetes-deployment.md).
   * OpenVPN 2.4.7 on Debian 10.
   * OpenVPN 2.5.5 on Ubuntu 22.04 LTS.
   * OpenVPN 2.4.7 on Ubuntu 20.04 LTS.
+  * OpenVPN Connect 3.8.1 on macOS 15.7.4.
 
 ## Contributing
 
@@ -68,4 +73,3 @@ See [docs/kubernetes-deployment.md](./docs/kubernetes-deployment.md).
 ## License
 
 [LICENSE](./LICENSE)
-
