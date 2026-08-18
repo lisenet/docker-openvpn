@@ -1,0 +1,83 @@
+x-openvpn-image: &openvpn-image lisenet/openvpn:${APP_VERSION:-latest}
+x-openvpn-volume: &openvpn-volume ./ovpn0:/etc/openvpn
+
+services:
+  openvpn:
+    image: *openvpn-image
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      net.ipv4.ip_forward: "1"
+      net.ipv4.conf.all.forwarding: "1"
+    ports:
+      - "${VPN_PORT:-31194}:1194/${VPN_PROTOCOL:-tcp}"
+    volumes:
+      - *openvpn-volume
+
+  generate-config:
+    image: *openvpn-image
+    profiles:
+      - setup
+    network_mode: none
+    environment:
+      # Required:
+      # VPN_HOSTNAME: domain or ip
+      VPN_PORT: 31194
+      VPN_PROTOCOL: tcp
+      DNS_SERVER: 1.1.1.1 8.8.8.8
+      NETWORK_CIDR: 10.8.0.0/24
+    volumes:
+      - *openvpn-volume
+    command:
+      - sh
+      - -c
+      - >-
+        ovpn_genconfig
+        -u "$${VPN_PROTOCOL}://$${VPN_HOSTNAME}:$${VPN_PORT}"
+        -C 'AES-256-GCM'
+        -a 'SHA384'
+        -b
+        -n "$${DNS_SERVER}"
+        -s "$${NETWORK_CIDR}"
+        -e 'topology subnet'
+
+  init-pki:
+    image: *openvpn-image
+    profiles:
+      - setup
+    network_mode: none
+    stdin_open: true
+    tty: true
+    volumes:
+      - *openvpn-volume
+    command:
+      - ovpn_initpki
+
+  copy-server-files:
+    image: *openvpn-image
+    profiles:
+      - setup
+    network_mode: none
+    volumes:
+      - *openvpn-volume
+    command:
+      - ovpn_copy_server_files
+
+  add-client:
+    image: *openvpn-image
+    profiles:
+      - client
+    network_mode: none
+    environment:
+      CLIENT_NAME: ${CLIENT_NAME:-user}
+      EASYRSA_ALGO: ${EASYRSA_ALGO:-ec}
+      EASYRSA_CURVE: ${EASYRSA_CURVE:-secp384r1}
+    volumes:
+      - *openvpn-volume
+    command:
+      - sh
+      - -c
+      - >-
+        easyrsa build-client-full "$${CLIENT_NAME}" &&
+        ovpn_getclient "$${CLIENT_NAME}" > "/etc/openvpn/$${CLIENT_NAME}.ovpn"
